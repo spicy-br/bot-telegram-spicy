@@ -1,4 +1,6 @@
 import logging
+import os
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     ApplicationBuilder,
@@ -7,13 +9,15 @@ from telegram.ext import (
     CallbackQueryHandler,
 )
 
-# Configurações
-TOKEN = "7521462337:AAFVvmYHCJKV4X-IWeg6pVRoywxtUppjaSg"
-CHANNEL_ID = "-1002576277480"
+load_dotenv()
+
+TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
+
 
 # /start envia logo + legenda, depois envia os botões separadamente
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
